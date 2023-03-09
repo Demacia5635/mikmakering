@@ -1,12 +1,3 @@
-input.onButtonPressed(Button.A, function () {
-    pins.digitalWritePin(DigitalPin.P8, 0)
-})
-input.onButtonPressed(Button.B, function () {
-    pins.digitalWritePin(DigitalPin.P8, 1)
-})
-function updateHumidityAnndTemp () {
-	
-}
 let humidity = 0
 let Temp = 0
 let list3: number[] = []
@@ -14,9 +5,6 @@ let optimumtemp = 40
 let minimumHumidty = 20
 let optimumhumdity = 60
 led.enable(true)
-basic.forever(function () {
-	
-})
 basic.forever(function () {
     serial.writeValue("temperature(C)", Temp)
     serial.writeValue("realTemp", input.temperature())
@@ -38,7 +26,7 @@ basic.forever(function () {
     }
     if (humidity < minimumHumidty) {
         while (minimumHumidty >= humidity) {
-            serial.writeValue("humidity(%)", humidity)
+            serial.writeValue("humidity(%)", minimumHumidty)
             pins.digitalWritePin(DigitalPin.P8, 1)
             basic.pause(100)
             humidity = pins.analogReadPin(AnalogPin.P0) / 4
